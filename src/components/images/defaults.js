@@ -12,7 +12,6 @@ module.exports = function supplyLayoutDefaults(layoutIn, layoutOut) {
         name: name,
         handleItemDefaults: imageDefaults
     };
-
     handleArrayContainerDefaults(layoutIn, layoutOut, opts);
 };
 
@@ -41,15 +40,17 @@ function imageDefaults(imageIn, imageOut, fullLayout) {
     for(var i = 0; i < 2; i++) {
         // 'paper' is the fallback axref
         var axLetter = axLetters[i];
-        var axRef = Axes.coerceRef(imageIn, imageOut, gdMock, axLetter, 'paper', undefined);
-
-        if(axRef !== 'paper') {
+        var axRef = Axes.coerceRef(imageIn, imageOut, gdMock, axLetter, 'paper', 'container');
+        if(axRef !== 'paper' && axRef !== 'container') {
             var ax = Axes.getFromId(gdMock, axRef);
             ax._imgIndices.push(imageOut._index);
         }
 
         Axes.coercePosition(imageOut, gdMock, coerce, axRef, axLetter, 0);
     }
+
+    
+    
 
     return imageOut;
 }

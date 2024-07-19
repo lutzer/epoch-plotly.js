@@ -59,6 +59,8 @@ function drawOne(gd, index) {
     var options = fullLayout.annotations[index] || {};
     var xa = Axes.getFromId(gd, options.xref);
     var ya = Axes.getFromId(gd, options.yref);
+    // var xa = Axes.getFromId(gd, 'container');
+    // var ya = Axes.getFromId(gd, 'container'); 
 
     if(xa) xa.setScale();
     if(ya) ya.setScale();

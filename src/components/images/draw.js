@@ -174,8 +174,6 @@ module.exports = function draw(gd) {
         }
         yPos += yOffset;
 
-        console.log(d)
-
         // Construct the proper aspectRatio attribute
         switch(d.sizing) {
             case 'fill':
