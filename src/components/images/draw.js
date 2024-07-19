@@ -155,6 +155,8 @@ module.exports = function draw(gd) {
             xPos = ((typeof(d.xref) === 'string') && xIsDomain) ?
                 xa._length * d.x + xa._offset :
                 xa.r2p(d.x) + xa._offset;
+        } else if (d.xref == "container") {
+            xPos = d.x * fullLayout.width;
         } else {
             xPos = d.x * size.w + size.l;
         }
@@ -165,10 +167,14 @@ module.exports = function draw(gd) {
                 // move up the page
                 ya._length * (1 - d.y) + ya._offset :
                 ya.r2p(d.y) + ya._offset;
+        } else if (d.yref == "container") {
+            yPos = (1 - d.y) * fullLayout.height;
         } else {
             yPos = size.h - d.y * size.h + size.t;
         }
         yPos += yOffset;
+
+        console.log(d)
 
         // Construct the proper aspectRatio attribute
         switch(d.sizing) {
