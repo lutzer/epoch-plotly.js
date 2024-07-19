@@ -59,8 +59,6 @@ function drawOne(gd, index) {
     var options = fullLayout.annotations[index] || {};
     var xa = Axes.getFromId(gd, options.xref);
     var ya = Axes.getFromId(gd, options.yref);
-    // var xa = Axes.getFromId(gd, 'container');
-    // var ya = Axes.getFromId(gd, 'container'); 
 
     if(xa) xa.setScale();
     if(ya) ya.setScale();
@@ -344,6 +342,15 @@ function drawRaw(gd, options, index, subplotId, xa, ya) {
                 }
                 basePx = ax._offset + ax.r2p(options[axLetter]);
                 autoAlignFraction = 0.5;
+            } else if (axRefType == 'container') {
+                if(axLetter === 'x') {
+                    alignPosition = options[axLetter];
+                    basePx = fullLayout.width * alignPosition;
+                } else {
+                    alignPosition = 1 - options[axLetter];
+                    basePx = fullLayout.height * alignPosition;
+                }
+                autoAlignFraction = options.showarrow ? 0.5 : alignPosition;
             } else {
                 var axRefTypeEqDomain = axRefType === 'domain';
                 if(axLetter === 'x') {

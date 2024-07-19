@@ -38,9 +38,9 @@ function handleAnnotationDefaults(annIn, annOut, fullLayout) {
         var axLetter = axLetters[i];
 
         // xref, yref
-        var axRef = Axes.coerceRef(annIn, annOut, gdMock, axLetter, '', 'paper');
+        var axRef = Axes.coerceRef(annIn, annOut, gdMock, axLetter, '', ['paper', 'container']);
 
-        if(axRef !== 'paper') {
+        if(axRef !== 'paper' && axRef !== 'container') {
             var ax = Axes.getFromId(gdMock, axRef);
             ax._annIndices.push(annOut._index);
         }
@@ -52,7 +52,7 @@ function handleAnnotationDefaults(annIn, annOut, fullLayout) {
             var arrowPosAttr = 'a' + axLetter;
             // axref, ayref
             var aaxRef = Axes.coerceRef(annIn, annOut, gdMock, arrowPosAttr, 'pixel',
-                    ['pixel', 'paper']);
+                    ['pixel', 'paper','container']);
 
             // for now the arrow can only be on the same axis or specified as pixels
             // TODO: sometime it might be interesting to allow it to be on *any* axis
